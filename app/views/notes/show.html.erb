@@ -1,0 +1,3 @@
+<p><%= @note.user.name %> </p>
+<p><%= @note.content %></p> 
+<%= link_to "edit" , edit_note_path  if policy(@note.user).update? %>

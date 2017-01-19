@@ -1,6 +1,6 @@
 # Devise Pundit Lab
 
-## Objectives
+## Objectives 
 
 We're going to learn how to integrate Pundit into a Rails application.
 For our data model, we're going to return to our secret notes message board.
