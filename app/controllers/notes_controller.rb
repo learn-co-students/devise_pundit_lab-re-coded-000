@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
-  
+  before_action :authenticate_user! , only: [:show]
   def new
-    
+
   end
   
   def create
@@ -9,30 +9,42 @@ class NotesController < ApplicationController
     note.user = current_user
     note.save!
     redirect_to '/'
+    authorize(note)
   end
 
   def update
+    @note=Note.find_by_id(params[:id])
     @note.update(note_params)
-    redirect_to '/'    
+    redirect_to '/'  
+    authorize(@note)  
   end
   
   def edit
     @note = Note.find(params[:id])
+    authorize(@note)
   end
   
   def show
+    @note=Note.find_by_id(params[:id])
+    authorize(@note)
   end
 
   def index
     @notes = Note.none
     if current_user
       @notes = current_user.readable
+      
     end
+    render '/application/index'
   end
 
-  private
+  def destroy
+   authorize(@note)
+ end
 
-  def note_params
-    params.require(:note).permit(:content, :visible_to)
-  end
+ private
+
+ def note_params
+  params.require(:note).permit(:content, :visible_to)
+end
 end
