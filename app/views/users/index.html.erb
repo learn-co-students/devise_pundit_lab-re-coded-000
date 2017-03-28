@@ -1,0 +1,11 @@
+<div>
+
+<ul>
+<% @users.each do |user| %>
+  <% if policy(user).index? %>
+    <li><%= user.email %></li>
+   <% end %> 
+<% end %>
+
+</ul>
+</div>
